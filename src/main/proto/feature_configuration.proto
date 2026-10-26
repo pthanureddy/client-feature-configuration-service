@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package featureconfig.v1;
+
+option java_multiple_files = true;
+option java_package = "dev.portfolio.featureconfig.v1";
+option java_outer_classname = "FeatureConfigurationProto";
+
+service FeatureConfigurationService {
+  rpc PutConfiguration(PutConfigurationRequest) returns (PutConfigurationResponse);
+  rpc GetConfiguration(GetConfigurationRequest) returns (GetConfigurationResponse);
+}
+
+message PutConfigurationRequest {
+  string tenant_id = 1;
+  string feature_key = 2;
+  bool enabled = 3;
+  int32 rollout_percentage = 4;
+  repeated string allowed_regions = 5;
+  int64 expected_version = 6;
+  string request_id = 7;
+}
+
+message PutConfigurationResponse {
+  FeatureConfiguration configuration = 1;
+  bool replayed = 2;
+}
+
+message GetConfigurationRequest {
+  string tenant_id = 1;
+  string feature_key = 2;
+}
+
+message GetConfigurationResponse {
+  FeatureConfiguration configuration = 1;
+}
+
+message FeatureConfiguration {
+  string tenant_id = 1;
+  string feature_key = 2;
+  bool enabled = 3;
+  int32 rollout_percentage = 4;
+  repeated string allowed_regions = 5;
+  int64 version = 6;
+  string updated_at = 7;
+}

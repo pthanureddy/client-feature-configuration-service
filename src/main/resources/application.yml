@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: client-feature-configuration-service
+  main:
+    web-application-type: none
+
+feature-config:
+  grpc-port: ${GRPC_PORT:9090}
+  tenant-api-keys: ${TENANT_API_KEYS:demo-tenant=local-development-only}
+  spanner:
+    enabled: ${SPANNER_ENABLED:false}
+    project-id: ${SPANNER_PROJECT_ID:local-project}
+    instance-id: ${SPANNER_INSTANCE_ID:local-instance}
+    database-id: ${SPANNER_DATABASE_ID:feature-config}
+    emulator-host: ${SPANNER_EMULATOR_HOST:}
